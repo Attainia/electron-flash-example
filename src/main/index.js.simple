@@ -1,0 +1,37 @@
+'use strict';
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const path = require('path');
+
+console.log('This processor architecture is ' + process.arch);
+
+var ppapiPath = __dirname + '\\win\\Release\\hello.dll';
+
+console.log('PPAPI path ' +  ppapiPath + ';application/x-ppapi-hello');
+app.commandLine.appendSwitch('register-pepper-plugins', ppapiPath + ';application/x-ppapi-hello');
+
+let mainWindow;
+
+app.on('window-all-closed', function() {
+  if (process.platform != 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('ready', function() {
+
+  mainWindow = new BrowserWindow({width: 800, height: 600,
+    'webPreferences': {
+      'plugins': true
+    }
+  });
+
+  mainWindow.loadURL(`https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_embed`);
+  
+  mainWindow.webContents.openDevTools();
+
+  mainWindow.on('closed', function() {
+    mainWindow = null;
+  });
+});
