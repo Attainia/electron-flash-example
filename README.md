@@ -21,7 +21,7 @@ rm -rf .git
 # install dependencies
 yarn
 ```
-You will then need to download and place the flash plugins in the static directory. See files 
+You will then need to download and place the flash plugins in the [static](https://github.com/Attainia/electron-flash-example/tree/master/static) directory. 
 
 
 ### Development Scripts
